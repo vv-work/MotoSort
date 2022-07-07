@@ -1,70 +1,48 @@
 # MotoSort
 
+!["Bubble Sort gif"](./res/BubbleSort_Avg_case.gif)
+
+> Bubble sort example onlie
+
+Implementaion of difrent sorting algorithms in the motoko
 
 ## Getting started
 <br/>
 
 Easy to use, expressive API:
-```motoko
-import Writer "mo:color/Writer";
-import TextStyle "mo:color/TextStyle";
 
-let { backgroundColor; textColor } = TextStyle;
-
-let writer = Writer.Writer();
-
-writer
-  .text("hello world")
-  .textColor(textColor.black)
-  .backgroundColor(backgroundColor.white)
-  .bold(true)
-  .print();
-```
-
-Chain multiple colors on the same line:
 ```motoko
 ...
 import Debug "mo:base/Debug";
+import Sorter "mo:sort/Sorter;
 
-Debug.print(
-  writer
-    .text("It's easy being green")
-    .textColor(textColor.green)
-    .read()
-  # ", however... " #
-  writer
-    .text("I really love purple backgrounds!")
-    .backgroundColor(backgroundColor.purple)
-    .read()
+let arr:[Nat] = [5,2,3,4,1];	
+
+//By default it uses Merge Sort
+sorted = Sorter.Sort(arr);
+
+//If needed can call
+quickSort = Sorter.QueickSort(arr);
+
+Debug.print(debug_show(sorted));
+Debug.print(debug_show(quickSort));
+
 );
 ```
-      
-Use RGB colors for the text or background:
-```motoko
-writer
-  .text("woah dude, RGB!")
-  .textColorRGB(20,40,60)
-  .backgroundColorRGB(180,200,220)
-  .print();
-```
+## Sorting Implementations
 
-Immutable text styling settings, so use it all over the place, and don't worry about overwriting a bound setting.
-```motoko
-let greenCheckMark = writer
-  .text("✓")
-  .textColor(textColor.green)
-  .backgroundColor(backgroundColor.white);
-let redCheckMark = greenCheckMark
-  .textColor(textColor.red);
+### Merge Sort
 
-greenCheckMark.print();
-redCheckMark.print();
-```
-<br/>
+!["Merge Sort gif"](./res/MergeSort_Avg_case.gif)
+
+
+### Selection Sort
+
+!["Selection Sort gif"](./res/SelectionSort_Avg_case.gif)
 
 ## Documentation
 
-Further documentation for the latest release can be found at [https://byronbecker.github.io/motoko-color](https://byronbecker.github.io/motoko-color).
+Further documentation for the latest release can be found at `docs` folder
 
 If you'd like to generate documentation locally run $(vessel bin)/mo-doc && firefox docs/index.html
 <br/>
@@ -80,7 +58,9 @@ making sure that both [vessel](https://github.com/dfinity/vessel) and [wasmtime]
 <br/>
 
 ## Credits
-Credits to [Christopher Hegemann](https://github.com/kritzcreek) for [motoko-library-template](https://github.com/kritzcreek/motoko-library-template) that helped jumpstart this library
+Credits to: 
+-  [Ivan Miroshnichenko](https://github.com/Voice-of-Hollowness) for participation in developement
+-  [Byson Becker](https://github.com/ByronBecker) for mentering in developement.
 <br/>
 <br/>
 
