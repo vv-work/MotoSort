@@ -12,7 +12,7 @@ Implementaion of difrent sorting algorithms in the motoko
 Easy to use, expressive API:
 
 ```motoko
-...
+
 import Debug "mo:base/Debug";
 import Sorter "mo:sort/Sorter;
 
