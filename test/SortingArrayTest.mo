@@ -9,31 +9,39 @@ import M "mo:matchers/Matchers";
 import S "mo:matchers/Suite";
 import T "mo:matchers/Testable";
  
+
+//Testing for Nat
 let unsortedArr:[Nat] = [9,3,2,5,7,1,5,4];
 let sortedArr:[Nat] = [1,2,3,4,5];
 
-
-let t:Text = "abcde";
-let t2:Text = "uiqdgcs";
-let sortedC :[Char] =Iter.toArray( t.chars());
-let unsortedC :[Char] = Iter.toArray(t2.chars());
 let isUnsortedSorted = Sorting.IsSorted(unsortedArr , Nat.compare);
-Debug.print(debug_show(isUnsortedSorted));
 let isSortedSorted = Sorting.IsSorted(sortedArr , Nat.compare);
-Debug.print(debug_show(isSortedSorted));
+
+
+//Testing for Char
+let sortedC :[Char] =Iter.toArray( "abcde".chars());
+let unsortedC :[Char] = Iter.toArray("uiqdgcs".chars());
 
 let isUnsortedSortedChar = Sorting.IsSorted(unsortedC , Char.compare);
-Debug.print(debug_show(isUnsortedSortedChar));
-
 let isSortedSortedChar = Sorting.IsSorted(sortedC , Char.compare);
-Debug.print(debug_show(isSortedSortedChar));
+
 
 let suite = S.suite("IsSorted()", [
-    S.test("Is unsorted sorted",
+
+// Nat Tests
+    S.test("Is unsorted Nat IsSorted()",
       isUnsortedSorted,
       M.equals(T.bool(false))),
-    S.test("anna is a palindrome",
+    S.test("Is sorted Nat IsSorted()",
       isSortedSorted,
+      M.equals(T.bool(true))),
+
+//Char tests
+    S.test("Is unorted Char IsSorted()",
+      isUnsortedSortedChar,
+      M.equals(T.bool(false))),
+    S.test("Is sorted Char IsSorted()",
+      isSortedSortedChar,
       M.equals(T.bool(true)))
 ]);
 
