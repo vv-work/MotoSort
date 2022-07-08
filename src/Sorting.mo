@@ -13,6 +13,8 @@ import Nat "mo:base/Nat";
 
 module {
 
+type Order = Order.Order;
+
 private func _swap(arr:[Nat],i:Nat,j:Nat):[Nat]{
 
     let mArr = Array.thaw<Nat>(arr);
