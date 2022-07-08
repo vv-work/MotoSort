@@ -1,5 +1,5 @@
 import Debug "mo:base/Debug";
-import Sorting "mo:src/Sorting";
+import Sorting "../src/Sorting";
 
 let arr:[Nat] = [3,5,4,2,1];
 
