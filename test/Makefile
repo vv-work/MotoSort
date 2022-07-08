@@ -1,3 +1,3 @@
 default:
-	$(shell vessel bin)/moc $(shell vessel sources) -wasi-system-api -o WriterTest.wasm WriterTest.mo && wasmtime WriterTest.wasm
-	rm -f WriterTest.wasm
+	$(shell vessel bin)/moc $(shell vessel sources) -wasi-system-api -o SortingArrayTest.wasm SortingArrayTest.mo && wasmtime SortingArrayTest.wasm
+	rm -f SortingArrayTest.wasm

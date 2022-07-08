@@ -27,6 +27,101 @@ let sort = Suite.suite("sort", [
   )
 ]);
 
+let findTest = do {
+  type Element = {
+    key : Text;
+    value : Int;
+  };
+
+  let xs = [
+    { key = "a"; value = 0; },
+    { key = "b"; value = 1; },
+    { key = "c"; value = 2; },
+  ];
+
+  let actual : ?Element = Array.find<Element>(xs, func (x : Element) : Bool {
+    x.key == "b";
+  });
+
+  let elementTestable : T.Testable<Element> = {
+    display = func (e : Element) : Text {
+      "{ key = " # T.textTestable.display(e.key) # ";" #
+      " value = " # T.intTestable.display(e.value) #
+      " }"
+    };
+    equals = func (e1 : Element, e2 : Element) : Bool =
+      e1.key == e2.key and e1.value == e2.value;
+  };
+
+  Suite.test(
+    "find",
+    actual,
+    M.equals<?Element>(T.optional(elementTestable, ?({ key = "b"; value = 1 })))
+  )
+};
+
+let mapEntriesTest = do {
+
+  let isEven = func (x : Int) : Bool {
+    x % 2 == 0;
+  };
+
+  let xs = [ 1, 2, 3, 4, 5, 6 ];
+
+  let actual = Array.mapEntries<Int, (Bool, Bool)>(
+    xs, func (value : Int, index : Nat) : (Bool, Bool) {
+      (isEven value, isEven index)
+    });
+
+  let expected = [
+    (false, true),
+    (true, false),
+    (false, true),
+    (true, false),
+    (false, true),
+    (true, false),
+  ];
+
+  Suite.test(
+    "mapEntries",
+    actual,
+    M.equals<[(Bool, Bool)]>(T.array(T.tuple2Testable(T.boolTestable, T.boolTestable), expected))
+  )
+};
+
+func makeNatural(x : Int) : Result.Result<Nat, Text> =
+  if (x >= 0) { #ok(Int.abs(x)) } else { #err(Int.toText(x) # " is not a natural number.") };
+
+func arrayRes(itm : Result.Result<[Nat], Text>) : T.TestableItem<Result.Result<[Nat], Text>> {
+  let resT = T.resultTestable(T.arrayTestable<Nat>(T.intTestable), T.textTestable);
+  { display = resT.display; equals = resT.equals; item = itm }
+};
+
+let mapResult = Suite.suite("mapResult", [
+  Suite.test("empty array",
+    Array.mapResult<Int, Nat, Text>([], makeNatural),
+    M.equals(arrayRes(#ok([])))
+  ),
+  Suite.test("success",
+    Array.mapResult<Int, Nat, Text>([ 1, 2, 3 ], makeNatural),
+    M.equals(arrayRes(#ok([1, 2, 3])))
+  ),
+  Suite.test("fail fast",
+    Array.mapResult<Int, Nat, Text>([ -1, 2, 3 ], makeNatural),
+    M.equals(arrayRes(#err("-1 is not a natural number.")))
+  ),
+  Suite.test("fail last",
+    Array.mapResult<Int, Nat, Text>([ 1, 2, -3 ], makeNatural),
+    M.equals(arrayRes(#err("-3 is not a natural number.")))
+  ),
+]);
+
+func arrayNat(xs : [Nat]) : T.TestableItem<[Nat]> {
+  T.array(T.natTestable, xs)
+};
+
+
+
 let suite = Suite.suite("Array", [
   mapResult,
   sort,

@@ -1,6 +1,7 @@
 import Text "mo:base/Text";
 import Bool "mo:base/Bool";
 import Char "mo:base/Char";
+import Iter "mo:base/Iter";
 
 import Array "mo:base/Array";
 import Order "mo:base/Order";
@@ -8,9 +9,11 @@ import Order "mo:base/Order";
 import Int "mo:base/Int";
 import Nat "mo:base/Nat";
 
+
+
 module {
 
-public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
+private func _swap(arr:[Nat],i:Nat,j:Nat):[Nat]{
 
     let mArr = Array.thaw<Nat>(arr);
     let tmp = arr[i];
@@ -18,8 +21,12 @@ public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
     mArr[j] := tmp;
     return(Array.freeze<Nat>(mArr));
 };
+public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
 
-public func selection_sort(array : [Nat]) : async [Nat] {
+  return _swap(arr,i,j);
+};
+
+public func selection_sort(array : [Nat]) : [Nat] {
     var sorted = array;
     let size = array.size();
     // First loop
@@ -36,8 +43,11 @@ public func selection_sort(array : [Nat]) : async [Nat] {
     return(sorted);
 };
 
-public func SelectionSort(arr:[Nat]): async [Nat]
-{
+public func IsSorted():Bool{
+  return true;
+};
+
+public func SelectionSort(arr:[Nat]):  [Nat] {
     return arr;
 
 };
