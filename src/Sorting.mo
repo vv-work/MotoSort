@@ -8,8 +8,6 @@ import Order "mo:base/Order";
 import Int "mo:base/Int";
 import Nat "mo:base/Nat";
 
-
-
 module {
 
 public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
@@ -20,8 +18,6 @@ public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
     mArr[j] := tmp;
     return(Array.freeze<Nat>(mArr));
 };
-
-
 
 public func selection_sort(array : [Nat]) : async [Nat] {
     var sorted = array;
