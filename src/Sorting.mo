@@ -44,8 +44,17 @@ public func selection_sort(array : [Nat]) : [Nat] {
     };  
     return(sorted);
 };
-
+//
 public func IsSorted<X>(xs : [X], f : (X, X) -> Order) :Bool{
+  let size = xs.size();
+  var i = 0;
+
+  while (i < size-1){
+    if(Order.isGreater(f(xs[i], xs[i+1]))){
+      return false;
+    };
+    i += 1;
+  };
   return true;
 };
 
