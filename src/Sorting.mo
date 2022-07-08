@@ -43,7 +43,7 @@ public func selection_sort(array : [Nat]) : [Nat] {
     return(sorted);
 };
 
-public func IsSorted():Bool{
+public func IsSorted<X>(xs : [X], f : (X, X) -> Order) :Bool{
   return true;
 };
 
