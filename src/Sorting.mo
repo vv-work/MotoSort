@@ -15,26 +15,30 @@ module {
 
 type Order = Order.Order;
 
-public func SelectionSort<X>(arr:[X], f : (X, X) -> Order):  [X] {
-    return arr;
-};
-
 public func Sort<X>(arr:[X], f : (X, X) -> Order):  [X] {
     return arr;
 };
 
-
-private func _swap(arr:[Nat],i:Nat,j:Nat):[Nat]{
-
-    let mArr = Array.thaw<Nat>(arr);
-    let tmp = arr[i];
-    mArr[i] := mArr[j];
-    mArr[j] := tmp;
-    return(Array.freeze<Nat>(mArr));
+public func QuickSort<X>(arr:[X], f : (X, X) -> Order):  [X] {
+    return arr;
 };
+
+public func SelectionSort<X>(arr:[X], f : (X, X) -> Order):  [X] {
+    return _selectionSort(arr,f);
+};
+
 public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
 
   return _swap(arr,i,j);
+};
+
+private func _swap<T>(arr:[T],i:Nat,j:Nat):[T]{
+
+    let mArr = Array.thaw<T>(arr);
+    let tmp = arr[i];
+    mArr[i] := mArr[j];
+    mArr[j] := tmp;
+    return(Array.freeze<T>(mArr));
 };
 
 
@@ -53,6 +57,24 @@ public func selection_sort(array : [Nat]) : [Nat] {
     sorted := _swap(sorted, index_minimum, i);
     };  
     return(sorted);
+};
+
+private func _selectionSort<X>(arr : [X],f : (X,X) -> Order) : [X] {
+    var sorted = arr;
+    let size = arr.size();
+    // Init cycle
+    for(i in Iter.range(0,size-1)){
+      var min =i ;
+      //Sub loop to determen minimum in subarray
+      for(j in Iter.range(i,size-1)){
+          if(Order.isGreater(f(sorted[min],sorted[j]))){
+            min:=j;
+          };
+      };
+      sorted := _swap(sorted,i,min);
+    };
+
+    return sorted;
 };
 
 //
