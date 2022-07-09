@@ -15,6 +15,15 @@ module {
 
 type Order = Order.Order;
 
+public func SelectionSort<X>(arr:[X], f : (X, X) -> Order):  [X] {
+    return arr;
+};
+
+public func Sort<X>(arr:[X], f : (X, X) -> Order):  [X] {
+    return arr;
+};
+
+
 private func _swap(arr:[Nat],i:Nat,j:Nat):[Nat]{
 
     let mArr = Array.thaw<Nat>(arr);
@@ -27,6 +36,7 @@ public func SwapElements(arr:[Nat],i:Nat,j:Nat):[Nat]{
 
   return _swap(arr,i,j);
 };
+
 
 public func selection_sort(array : [Nat]) : [Nat] {
     var sorted = array;
@@ -44,6 +54,7 @@ public func selection_sort(array : [Nat]) : [Nat] {
     };  
     return(sorted);
 };
+
 //
 public func IsSorted<X>(xs : [X], f : (X, X) -> Order) :Bool{
   let size = xs.size();
@@ -58,9 +69,5 @@ public func IsSorted<X>(xs : [X], f : (X, X) -> Order) :Bool{
   return true;
 };
 
-public func SelectionSort(arr:[Nat]):  [Nat] {
-    return arr;
-
-};
 
 }
